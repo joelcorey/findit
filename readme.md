@@ -14,3 +14,6 @@ This will fetch all files.
 In your web browser of choice navigate to:
 
 - localhost/findjob
+  
+##  Note
+This is a stripped down and more recent version of GetStuff and reflects my move to a different city :)
