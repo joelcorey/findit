@@ -1,5 +1,5 @@
 ## Why?
-- Searches Craigslist for information
+- Searches Craigslist for information based on city and keywords
 - Saves times
 - Minimal user interface.
 
@@ -14,10 +14,3 @@ This will fetch all files.
 In your web browser of choice navigate to:
 
 - localhost/findjob
-- localhost/findjoblocal
-- localhost/findcarlocal
-
-## Warning
-- This was one of my first PHP projects ever.  
-- It had never been updated to best practices.  
-- The code quality is rather terrible.  
