@@ -39,14 +39,26 @@ foreach ($link_master as $link) {
 	// account for whitespace / blank links
 	if ($link !== '') {
 		$res_page = crawley($link, $useragent);
-		echo $res_page;
-		// $res = explode($response_page, 'mn-listingcontent');
-		// foreach ($res as $r) {
-		// 	$res_list_url = scrape_between($r, 'href="', '"');
-		// 	$res_list_name = scrape_between($r, '>', '</a>');
-		// 	$res_list_phone = scrape_between($r, 'Phone">', '</li>');
-		// 	echo $res_list_name . ' - ' . $res_list_phone . ' ' . $res_list_url;
-		// }
+
+		// Get rid of all the extra crap on these pages
+		$res_page = scrape_between($res_page, 'mn-directory-searchresults', '<div id="mn-footer-navigation"');
+		// echo $res_page;
+		// die();
+		$res = explode('mn-list-item-', $res_page);
+
+		foreach ($res as $r) {
+			$mn_listingcontent = explode('mn-listingcontent', $r);
+
+			foreach ($mn_listingcontent as $list_item) {
+				//echo $list_item . '<br />';
+				$item_url = scrape_between($r, 'href="', '"');
+				$item_name = scrape_between($r, '>', '</a>');
+				$item_phone = scrape_between($r, 'Phone">', '</li>');
+				echo $item_name . ' - ' . $item_phone . ' ' . $item_url . '<br />';
+			}
+			
+			
+		}
 	}
 	
 	
