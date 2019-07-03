@@ -10,7 +10,7 @@ $options = array(
   CURLOPT_FOLLOWLOCATION => TRUE,
   CURLOPT_AUTOREFERER => TRUE,
   CURLOPT_USERAGENT => $agent,
-  CURLOPT_TIMEOUT => 1800
+  CURLOPT_TIMEOUT => 50000
 );
 
 curl_setopt_array($ch, $options);

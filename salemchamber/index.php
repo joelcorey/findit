@@ -43,21 +43,14 @@ foreach ($link_master as $link) {
 
 		// Get rid of all the extra crap on these pages
 		$res_page = scrape_between($res_page, 'mn-members1col">', '<div id="mn-footer-navigation"');
-		// echo $res_page;
-		// die();
+		// Non-unique at front so explode on back html elements
 		$res = explode('<div class="mn-clear"></div>', $res_page);
 
 		foreach ($res as $r) {
-			//echo $r;
-
 			$get_url = explode('itemprop="name">', $r);
-			// print_r($get_url);
-			// die();
-
+			
 			foreach ($get_url as $url) {
-				
 				$u = scrape_between($url, '<a href="', '" target');
-				echo $u;
 				
 				if ($u !== '') {
 					$useragent = $list[array_rand($list)];
@@ -65,6 +58,16 @@ foreach ($link_master as $link) {
 					$get_individual_data = scrape_between($get_individual_page, '<div class="mn-member-sidebar">', '<div id="mn-member-tab-content-container" class="">'); 
 					
 					echo $get_individual_data;
+
+					// this is to inefficent and leads to a 504 / timeout 
+					// even with an EXTREMELY obscene cURL set timeout
+					// threading? then pass to google sheets
+					// .. ?
+					//$name = scrape_between($get_individual_data, '<div id="mn-member-name-nologo">', '</div>');
+					//$link = scrape_between($get_individual_data, '<a itemprop="url" href="', ' class="mn-print-url">');
+					//$number = scrape_between($get_individual_data, '<div itemprop="telephone" class="mn-member-phone1">', '</div>');
+					// echo $name . ' - ' . $link . '<br />';
+					echo '<hr />';
 				}
 			}
 			
