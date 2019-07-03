@@ -38,24 +38,37 @@ foreach ($link_master as $link) {
 
 	// account for whitespace / blank links
 	if ($link !== '') {
+		$useragent = $list[array_rand($list)];
 		$res_page = crawley($link, $useragent);
 
 		// Get rid of all the extra crap on these pages
-		$res_page = scrape_between($res_page, 'mn-directory-searchresults', '<div id="mn-footer-navigation"');
+		$res_page = scrape_between($res_page, 'mn-members1col">', '<div id="mn-footer-navigation"');
 		// echo $res_page;
 		// die();
-		$res = explode('mn-list-item-', $res_page);
+		$res = explode('<div class="mn-clear"></div>', $res_page);
 
 		foreach ($res as $r) {
-			$mn_listingcontent = explode('mn-listingcontent', $r);
+			//echo $r;
 
-			foreach ($mn_listingcontent as $list_item) {
-				//echo $list_item . '<br />';
-				$item_url = scrape_between($r, 'href="', '"');
-				$item_name = scrape_between($r, '>', '</a>');
-				$item_phone = scrape_between($r, 'Phone">', '</li>');
-				echo $item_name . ' - ' . $item_phone . ' ' . $item_url . '<br />';
+			$get_url = explode('itemprop="name">', $r);
+			// print_r($get_url);
+			// die();
+
+			foreach ($get_url as $url) {
+				
+				$u = scrape_between($url, '<a href="', '" target');
+				echo $u;
+				
+				if ($u !== '') {
+					$useragent = $list[array_rand($list)];
+					$get_individual_page = crawley($u, $useragent);
+					$get_individual_data = scrape_between($get_individual_page, '<div class="mn-member-sidebar">', '<div id="mn-member-tab-content-container" class="">'); 
+					
+					echo $get_individual_data;
+				}
 			}
+			
+			
 			
 			
 		}
