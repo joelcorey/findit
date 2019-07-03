@@ -10,13 +10,13 @@ require_once 'useragentlist.php';
 $categories = array(
   //"acc",  // accounting
   //"bus",  // business / management
-  "etc",  // et cetera
+  //"etc",  // et cetera
   "cpg",  // gigs - computer
-  "crg",  // gigs - creative
-  "med",  // art / media / design
+  //"crg",  // gigs - creative
+  //"med",  // art / media / design
   //"npo",  // non profit
   //"rej",  // real estate
-  "sad",  // sys admin and network
+  //"sad",  // sys admin and network
   //"tch",  // tech support
   //"sls",  // sales
   "sof",  // software
@@ -25,30 +25,59 @@ $categories = array(
   );
 
 $cities = array(
-  "milwaukee"
+  "albuquerque",
+  "bend",
+  "butte",
+  "bismarck",
+  "boise",
+  "corvallis",
+  "dallas",
+  "desmoines",
+  "eastoregon",
+  "elko",
+  "eugene",
+  "kansascity",
+  "kpr",
+  "lewiston",
+  "phoenix",
+  "portland",
+  "medford",
+  "milwaukee",
+  "minneapolis",
+  "oklahomacity",
+  "rapidcity",
+  "reno",
+  "salem",
+  "saltlakecity",
+  "seattle",
+  "stlouis",
+  "yakima"
   );
 
 $domain = "craigslist.org";
 
 $keywords = array(
-  "angular",
   "api",
   "associate",
   "automation",
-  "C#",
+  "component",
+  "dev",
+  "gatsby",
+  "html",
   "javascript",
-  "lemp",
-  ".net",
-  "nginx",
+  "linux",
+  "node",
   "php",
-  "pwa", // progressive web app
+  "pwa",
+  "react",
+  "react.js",
   "remote",
   "script",
+  "spa",
   "telecommute",
   "ubuntu",
-  "vue"
+  "vue",
+  "web"
 );
 
-$filters = array(
-  "NO CREDIT CARD REQUIRED!!!"
-);
+$filters = array();
