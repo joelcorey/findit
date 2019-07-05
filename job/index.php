@@ -46,7 +46,7 @@ foreach ($cities as $city) {
 		//die();
 
 		// List the city and category everytime we switch cities:
-		$catTitle = scrape_between($responsePage, 'class="reset">', '</a>');
+		$catTitle = scrapeBetween($responsePage, 'class="reset">', '</a>');
 		//echo "<pre>" . $city . ' / ' . $cat . "</pre>";
 		echo "<pre>" . $city . ' / ' . $catTitle . "</pre>";
 
@@ -54,15 +54,15 @@ foreach ($cities as $city) {
 
 		foreach ($responseTitle as $response) {
 			
-			$dateOfPost = scrape_between($response, 'datetime="',' ');
+			$dateOfPost = scrapeBetween($response, 'datetime="',' ');
 			if ($dateOfPost) {
 				$monthOfPost = explode('-', $dateOfPost);
 				$monthOfPost = $monthOfPost[1];
 			}
 			
 			//echo $monthOfPost . '<br />';
-			$href = scrape_between($response, 'href="', '"'); //need to be before title
-			$title = scrape_between($response, 'hdrlnk">', '<');
+			$href = scrapeBetween($response, 'href="', '"'); //need to be before title
+			$title = scrapeBetween($response, 'hdrlnk">', '<');
 			// used to prevent duplicate matches
 			$previousTitle = '';
 			

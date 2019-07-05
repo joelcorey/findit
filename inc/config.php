@@ -494,7 +494,7 @@ $cities = array(
   'micronesia',
   'puertorico',
   'virgin'
-)
+);
 
 // old array
 // $cities = array(
