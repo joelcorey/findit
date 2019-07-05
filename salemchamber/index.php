@@ -63,7 +63,8 @@ foreach ($link_master as $link) {
 					// even with an EXTREMELY obscene cURL set timeout
 					// threading? then pass to google sheets
 					// .. ?
-					//$name = scrape_between($get_individual_data, '<div id="mn-member-name-nologo">', '</div>');
+					//$nameProof
+					//number = scrape_between($get_individual_data, '<div id="mn-member-name-nologo">', '</div>');
 					//$link = scrape_between($get_individual_data, '<a itemprop="url" href="', ' class="mn-print-url">');
 					//$number = scrape_between($get_individual_data, '<div itemprop="telephone" class="mn-member-phone1">', '</div>');
 					// echo $name . ' - ' . $link . '<br />';

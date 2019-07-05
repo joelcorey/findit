@@ -18,65 +18,81 @@
 require('../inc/config.php');
 require('../inc/util.php');
 
+date_default_timezone_set('America/Los_Angeles');
+// un-needed example:
+// $date = date('Y-m-d');
+
+// get current month for date comparisons later
+$month = date('m');
+// if ($month[0] == 0) {
+// 	$month = substr($month, 1);
+// }
+
+// Yay nested foreach loops! So efficient! /sarcasm ..
 foreach ($cities as $city) {
 
 	foreach ($categories as $cat) {
 		
 		// Define random user agent from included user agent array PHP file
-		$useragent = $list[array_rand($list)];
-		//echo "<pre>Useragent: " . $useragent . "</pre>";
+		$userAgent = $list[array_rand($list)];
+		//echo "<pre>userAgent: " . $userAgent . "</pre>";
 
 		// Define the URL to scrape
 		$url = 'http://' . $city . '.' . $domain . '/search/' . $cat;
 		
 		// Actually start scraping using the PHP cURL library
-		$response_page = crawley($url, $useragent);
-		//echo $response_page;
+		$responsePage = crawley($url, $userAgent);
+		//echo $responsePage;
 		//die();
 
 		// List the city and category everytime we switch cities:
-		$cat_title = scrape_between($response_page, 'class="reset">', '</a>');
+		$catTitle = scrape_between($responsePage, 'class="reset">', '</a>');
 		//echo "<pre>" . $city . ' / ' . $cat . "</pre>";
-		echo "<pre>" . $city . ' / ' . $cat_title . "</pre>";
+		echo "<pre>" . $city . ' / ' . $catTitle . "</pre>";
 
-		$response_title = explode('class="result-row"', $response_page);
+		$responseTitle = explode('class="result-row"', $responsePage);
 
-		foreach ($response_title as $response) {
+		foreach ($responseTitle as $response) {
 			
-			$date = scrape_between($response, 'datetime="',' ');
+			$dateOfPost = scrape_between($response, 'datetime="',' ');
+			if ($dateOfPost) {
+				$monthOfPost = explode('-', $dateOfPost);
+				$monthOfPost = $monthOfPost[1];
+			}
 			
+			//echo $monthOfPost . '<br />';
 			$href = scrape_between($response, 'href="', '"'); //need to be before title
-
 			$title = scrape_between($response, 'hdrlnk">', '<');
+			// used to prevent duplicate matches
+			$previousTitle = '';
+			
+			// for now just check if post is within the same month of current date
+			if ($month == $monthOfPost) {
+				//match_keywords($title, $keywords);
+				foreach ($keywords as $key) {
 
-			$previous_title = '';
+					if (stripos($title, $key) !== false && stripos($title, $previousTitle) !== true ) {
 
-			//match_keywords($title, $keywords);
-			foreach ($keywords as $key) {
+						// prevent duplicate matches
+						$previousTitle = $title;
 
+						//Filter between local and surrounding area matches so that links are formatted correctly:
+						if (strpos($href, '//') !== false) {
+							
+							$hrefz = explode("//", $href);
+							$href = $hrefz[1];
+					
+							echo '<pre>' .  $dateOfPost . ' <a href="https://' . $href . '" target="_blank">' . $title . '</a></pre>';
+						}
 
-				if (stripos($title, $key) !== false && stripos($title, $previous_title) !== true ) {
+						// deprecated?
+						// if (strpos($href, '//') !== true){
+						// 	echo '<pre>' . $date . ' Other match: <a href="https://' . $href . '" target="_blank">' . $title . '</a></pre>';
+						// }
 
-					// prevent duplicate matches
-					$previous_title = $title;
-
-					//Filter between local and surrounding area matches so that links are formatted correctly:
-					if (strpos($href, '//') !== false) {
-						
-						$hrefz = explode("//", $href);
-						$href = $hrefz[1];
-				
-						echo '<pre>' .  $date . ' <a href="https://' . $href . '" target="_blank">' . $title . '</a></pre>';
-					}
-
-					if (strpos($href, '//') !== true){
-				
-						//echo '<pre>' . $date . ' Other match: <a href="https://' . $href . '" target="_blank">' . $title . '</a></pre>';
 					}
 
 				}
-
-				
 
 			}
 
