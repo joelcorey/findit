@@ -30,7 +30,7 @@ curl_close($ch);
 return $data;
 }
 
-function scrape_between($data, $start, $end){
+function scrapeBetween($data, $start, $end){
 $data = stristr($data, $start); // Stripping all data from before $start
 $data = substr($data, strlen($start));  // Stripping $start
 $stop = stripos($data, $end);   // Getting the position of the $end of the data to scrape
