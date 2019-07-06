@@ -17,6 +17,7 @@
 
 require('../inc/config-eu.php');
 require('../inc/util.php');
+require('../inc/filter.php');
 
 date_default_timezone_set('America/Los_Angeles');
 // un-needed example:
@@ -71,7 +72,10 @@ foreach ($cities as $city) {
 				//match_keywords($title, $keywords);
 				foreach ($keywords as $key) {
 
-					if (stripos($title, $key) !== false && stripos($title, $previousTitle) !== true ) {
+					if (
+						stripos($title, $key) !== false 
+						&& stripos($title, $previousTitle) !== true 
+						&& !in_array($title, $filter)) {
 
 						// prevent duplicate matches
 						$previousTitle = $title;
