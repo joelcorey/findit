@@ -15,7 +15,7 @@
 
 <?php
 
-require('../inc/config.php');
+require('../inc/config-ca.php');
 require('../inc/util.php');
 
 date_default_timezone_set('America/Los_Angeles');
