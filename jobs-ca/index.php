@@ -15,6 +15,7 @@
 
 <?php
 
+require('../inc/config-common.php');
 require('../inc/config-ca.php');
 require('../inc/util.php');
 require('../inc/filter.php');
@@ -39,7 +40,7 @@ foreach ($cities as $city) {
 		//echo "<pre>userAgent: " . $userAgent . "</pre>";
 
 		// Define the URL to scrape
-		$url = 'http://' . $city . '.' . $domain . '/search/' . $cat;
+		$url = $city . '.' . $domain . '/search/' . $cat;
 		
 		// Actually start scraping using the PHP cURL library
 		$responsePage = crawley($url, $userAgent);

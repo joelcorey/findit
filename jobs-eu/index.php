@@ -15,6 +15,7 @@
 
 <?php
 
+require('../inc/config-common.php');
 require('../inc/config-eu.php');
 require('../inc/util.php');
 require('../inc/filter.php');
