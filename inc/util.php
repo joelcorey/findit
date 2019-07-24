@@ -20,9 +20,11 @@ $data = curl_exec($ch);
 if(!$data){
   echo "<br />cURL error number: " . curl_errno($ch);
   echo "<br />cURL error: " . curl_error($ch) . " on URL - " . $url;
-  var_dump(curl_getinfo($ch));
-  var_dump(curl_error($ch));
-  exit;
+  echo "continueing with next";
+  // var_dump(curl_getinfo($ch));
+  // var_dump(curl_error($ch));
+  // exit;
+  return;
 }
 
 curl_close($ch);

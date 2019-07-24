@@ -26,9 +26,7 @@ date_default_timezone_set('America/Los_Angeles');
 
 // get current month for date comparisons later
 $month = date('m');
-// if ($month[0] == 0) {
-// 	$month = substr($month, 1);
-// }
+$day = date('m');
 
 // Yay nested foreach loops! So efficient! /sarcasm ..
 foreach ($cities as $city) {
@@ -55,11 +53,12 @@ foreach ($cities as $city) {
 		$responseTitle = explode('class="result-row"', $responsePage);
 
 		foreach ($responseTitle as $response) {
-			
+
 			$dateOfPost = scrapeBetween($response, 'datetime="',' ');
 			if ($dateOfPost) {
-				$monthOfPost = explode('-', $dateOfPost);
-				$monthOfPost = $monthOfPost[1];
+				$explodeDateOfPost = explode('-', $dateOfPost);
+				$monthOfPost = $explodeDateOfPost[1];
+				$dayOfPost = $explodeDateOfPost[2];
 			}
 			
 			//echo $monthOfPost . '<br />';
@@ -69,7 +68,9 @@ foreach ($cities as $city) {
 			$previousTitle = '';
 			
 			// for now just check if post is within the same month of current date
+			// if ($month == $monthOfPost && $day == $dayOfPost) {
 			if ($month == $monthOfPost) {
+
 				//match_keywords($title, $keywords);
 				foreach ($keywords as $key) {
 
