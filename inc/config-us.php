@@ -78,7 +78,7 @@ $cities = array(
   'delaware',
   //'District of Columbia',
   'washingtondc',
-  //'Florida',
+  'Florida',
   'daytona',
   'keys',
   'fortlauderdale',

@@ -26,24 +26,59 @@ $categories = array(
 
 $keywords = array(
   "api",
+  "app",
   "associate",
   "automation",
-  "component",
+  "cloud",
+  
+  "html",
+  "css",
   "dev",
   "gatsby",
-  "html",
+  
+  "integration",
   "javascript",
-  "linux",
   "node",
+  
   "php",
+
+  "progressive",
   "pwa",
   "react",
-  "react.js",
-  "remote",
-  "script",
-  "spa",
-  "telecommute",
-  "ubuntu",
   "vue",
-  "web"
+
+  "remote",
+  "telecommute",
+
+  "script",  
+  "ubuntu",
+  "linux",
+
+  "site",
+  "web",
+  "website",
+
+  "sheets",
+  "google",
+  "airtable",
+
+  "contentful",
+  "wordpress",
+  "square", // squarespace
+  "wix"
 );
+
+// $keywords = array(
+//   "logo",
+//   "design",
+//   "print",
+//   "edit",
+//   "web",
+//   "dev",
+//   "ios",
+//   "android",
+//   "app",
+//   "ecommerce",
+//   "e-commerce"
+
+// );

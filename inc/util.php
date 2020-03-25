@@ -19,8 +19,8 @@ $data = curl_exec($ch);
 
 if(!$data){
   echo "<br />cURL error number: " . curl_errno($ch);
-  echo "<br />cURL error: " . curl_error($ch) . " on URL - " . $url;
-  echo "continueing with next";
+  echo "<br />cURL error: " . curl_error($ch) . " on URL - ";
+  echo "<br />Attempting to continue with next url";
   // var_dump(curl_getinfo($ch));
   // var_dump(curl_error($ch));
   // exit;
@@ -33,11 +33,11 @@ return $data;
 }
 
 function scrapeBetween($data, $start, $end){
-$data = stristr($data, $start); // Stripping all data from before $start
-$data = substr($data, strlen($start));  // Stripping $start
-$stop = stripos($data, $end);   // Getting the position of the $end of the data to scrape
-$data = substr($data, 0, $stop);    // Stripping all data from after and including the $end of the data to scrape
-return $data;   // Returning the scraped data from the function
+  $data = stristr($data, $start); // Stripping all data from before $start
+  $data = substr($data, strlen($start));  // Stripping $start
+  $stop = stripos($data, $end);   // Getting the position of the $end of the data to scrape
+  $data = substr($data, 0, $stop);    // Stripping all data from after and including the $end of the data to scrape
+  return $data;   // Returning the scraped data from the function
 }
 
 function match_keywords(/*array &*/$search, /*array &*/$keys) { 	// A function to replace the foreach keyword search
@@ -47,5 +47,5 @@ foreach ($keys as $key) {
     $datamatch = $search;
   }
 }
-return $datamatch;
+  return $datamatch;
 }

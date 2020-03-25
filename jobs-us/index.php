@@ -26,7 +26,7 @@ date_default_timezone_set('America/Los_Angeles');
 
 // get current month for date comparisons later
 $month = date('m');
-$day = date('m');
+$day = date('d');
 
 // Yay nested foreach loops! So efficient! /sarcasm ..
 foreach ($cities as $city) {
@@ -35,19 +35,15 @@ foreach ($cities as $city) {
 		
 		// Define random user agent from included user agent array PHP file
 		$userAgent = $list[array_rand($list)];
-		//echo "<pre>userAgent: " . $userAgent . "</pre>";
 
 		// Define the URL to scrape
 		$url = $city . '.' . $domain . '/search/' . $cat;
 		
 		// Actually start scraping using the PHP cURL library
 		$responsePage = crawley($url, $userAgent);
-		//echo $responsePage;
-		//die();
 
 		// List the city and category everytime we switch cities:
 		$catTitle = scrapeBetween($responsePage, 'class="reset">', '</a>');
-		//echo "<pre>" . $city . ' / ' . $cat . "</pre>";
 		echo "<pre>" . $city . ' / ' . $catTitle . "</pre>";
 
 		$responseTitle = explode('class="result-row"', $responsePage);
@@ -60,7 +56,10 @@ foreach ($cities as $city) {
 				$monthOfPost = $explodeDateOfPost[1];
 				$dayOfPost = $explodeDateOfPost[2];
 			}
-			
+
+			//echo '$dateOfPost: ' . $dateOfPost . ' dayOfPost: ' . $dayOfPost . ' actual date day: ' . $day . '<br />';
+			//die();
+	
 			//echo $monthOfPost . '<br />';
 			$href = scrapeBetween($response, 'href="', '"'); //need to be before title
 			$title = scrapeBetween($response, 'hdrlnk">', '<');
@@ -84,16 +83,18 @@ foreach ($cities as $city) {
 
 						//Filter between local and surrounding area matches so that links are formatted correctly:
 						if (strpos($href, '//') !== false) {
-							
-							$hrefz = explode("//", $href);
-							$href = $hrefz[1];
+							// if ($day == $dayOfPost) {
+								$hrefz = explode("//", $href);
+								$href = $hrefz[1];
 					
-							echo '<pre>' .  $dateOfPost . ' <a href="http://' . $href . '" target="_blank">' . $title . '</a></pre>';
+								echo '<pre>' .  $dateOfPost . ' <a href="http://' . $href . '" target="_blank">' . $title . '</a></pre>';
+							//}
+							
 						}
 
 						// deprecated?
 						// if (strpos($href, '//') !== true){
-						// 	echo '<pre>' . $date . ' Other match: <a href="https://' . $href . '" target="_blank">' . $title . '</a></pre>';
+						// 	echo '<pre>' . $dateOfPost . ' Other match: <a href="https://' . $href . '" target="_blank">' . $title . '</a></pre>';
 						// }
 
 					}
